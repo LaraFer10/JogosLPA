@@ -12,27 +12,31 @@ public class Jogo {
 		
 		//Identifica os usuarios retornando um vetor de nomes
 		vetUsuarios = identificaUsuario();
-		// Recebe a opção escolhida pelo usuario
-		opt = escolhaMenu(vetUsuarios);
-		
 		// Leva o usuário para a execussão do jogo escolhido
-		switch(opt) {
-		case 1:
-			System.out.println("Jogo da Forca");
-			break;
-		case 2:
-			System.out.println("Batalha Naval");
-			break;
-		case 3:
-			System.out.println("Campo Minado");
-			break;
-		case 4:
-			System.out.println("##--- Fim! Esperamos que tenha se divertido! :) ---##");
-			break;
-		default:
-			System.out.println("Opição incorreta!");
-			break;
-		}
+		do {
+			// Recebe a opção escolhida pelo usuario
+			opt = escolhaMenu(vetUsuarios);
+			//Verifica se o usuario digitou numeros negativos
+			if(opt < 0) {
+					
+				System.out.println("Opição incorreta!");
+			}
+			if(opt == 1) {
+						
+				System.out.println("Jogo da Forca");
+			}
+			if(opt == 2) {
+						
+				System.out.println("Batalha Naval");
+			}
+			if(opt == 3) {
+						
+				System.out.println("Campo Minado");
+			}
+					
+					
+		}while(opt < 4);
+		System.out.println("##--- Fim! Esperamos que tenha se divertido! :) ---##");
 	}
 	
 	//Identifica os Usuarios que vao jogar e retorna um vetor com nomes para o main
