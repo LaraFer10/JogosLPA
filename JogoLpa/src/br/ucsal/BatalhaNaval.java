@@ -5,9 +5,15 @@ import java.util.Scanner;
 public class BatalhaNaval {
 
 	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
 		int opt;
 		String[] vetUsuarios = new String[2]; 
+		/*---- BATALHA NAVAL ----*/
 		String[][] tabuleiroPlay1 = new String[10][10];
+		String[][] tabuleiroPlay2 = new String[10][10];
+		int [] jogada = new int[2];
+		int[] numeroDeBarcos = new int[4];
+		int lin, col, posicao, barco = 0, quantBarco = 0, cont = 0;
 		
 		//Identifica os usuarios retornando um vetor de nomes
 		vetUsuarios = identificaUsuario();
@@ -27,8 +33,138 @@ public class BatalhaNaval {
 			}
 			if(opt == 2) {
 				
-				exibirTabuleiro(tabuleiroPlay1);
+				//Esta condição garante que o jogador1 so terá 4 barcos
+				while(quantBarco < 4) {
+					exibirTabuleiro(tabuleiroPlay1);
+					System.out.println("##- Jogador 1 (escolha a posição dos barcos) -##");
+					tracoHorizontal();
+					tracoVertical();
+					System.out.print("(1) Porta aviões                           ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(2) Navio Tanque                           ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(3) Contratorpedeiros                      ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(4) Submarinos                             ");
+					tracoVertical();
+					enter();
+					tracoHorizontal();
+					System.out.println("Escolha um BARCO:");
+					if(barco != 0) {
+						barco = 0;
+					}
+					barco = input.nextInt();
+					
+					/*Verifica se o barco ja foi adicionado	ao tabuleiro, senão ele é adicionado 
+					 * ao vetor de barcos do jogador e adicionado ao tabuleiro usando o processo de empilhamento*/
+					
+					for (int i = 0; i < numeroDeBarcos.length; i++) {
+						if(barco == numeroDeBarcos[i]) {
+							cont = 1;
+						}
+						if(i != 0) {
+							//se o barco ja tiver sido add então não passa pelo processo de empilhamento
+							if(cont != 1) {
+								
+								//se o vetor na posição anterior a posição atual é 'vazio' para poder add o barco
+								if(numeroDeBarcos[i-1] == 0) {
+									numeroDeBarcos[i-1] = barco;
+								}else if(numeroDeBarcos[i] == 0){
+									//se o vetor na posição atual é 'vazio' para poder add o barco
+									numeroDeBarcos[i] = barco;
+								}else if(numeroDeBarcos[i+1] == 0) {
+									//se o vetor na posição a frente a posição atual é 'vazio' para poder add o barco
+									numeroDeBarcos[i+1] = barco;
+								}
+							}
+						}else {
+							if(numeroDeBarcos[i] == 0){
+								numeroDeBarcos[i] = barco;
+							}
+						}
+					}
+					
+					if(cont == 1) {
+						
+						System.out.println("Este barco ja foi escolhido!");	
+					}else {
+						
+						System.out.println("Escolha a LINHA e a COLUNA:");
+						lin = input.nextInt();
+						col = input.nextInt();
+						System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
+						posicao = input.nextInt();
+						if(posicao == 1) {
+							posicaoDosBarcosVertical(lin, col, barco, tabuleiroPlay1);
+						}else if(posicao == 2) {
+							posicaoDosBarcosHorizontal(lin, col, barco, tabuleiroPlay1);
+						}
+					}
+					
+					quantBarco++;
+					
+				}
+					
+				//Esta condição garante que o jogador2 so terá 4 barcos
+
+				for (int i = 0; i < numeroDeBarcos.length; i++) {
+					exibirTabuleiro(tabuleiroPlay2);
+					System.out.println("##- Jogador 2 (escolha a posição dos barcos) -##");
+					tracoHorizontal();
+					tracoVertical();
+					System.out.print("(1) Porta aviões                           ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(2) Navio Tanque                           ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(3) Contratorpedeiros                      ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(4) Submarinos                             ");
+					tracoVertical();
+					enter();
+					tracoHorizontal();
+					System.out.println("Escolha um BARCO:");
+					if(barco != 0) {
+						barco = 0;
+					}
+					barco = input.nextInt();
+					//Verifica se o barco ja foi adicionado	
+					if(barco != numeroDeBarcos[i]) {
+						System.out.println("Escolha a LINHA e a COLUNA:");
+						lin = input.nextInt();
+						col = input.nextInt();
+						System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
+						posicao = input.nextInt();
+						if(posicao == 1) {
+							posicaoDosBarcosVertical(lin, col, barco, tabuleiroPlay2);
+						}else if(posicao == 2) {
+							posicaoDosBarcosHorizontal(lin, col, barco, tabuleiroPlay2);
+						}
+								
+								
+					}else {
+						System.out.println("Este barco ja foi escolhido!");
+								
+					}
+					
+						
+				}
+				
+				
+				
 			}
+			
 			if(opt == 3) {
 				
 				System.out.println("Campo Minado");
@@ -134,7 +270,12 @@ public class BatalhaNaval {
 			System.out.print(lin+"  ");
 			tracoVertical();				
 			for(int col = 0; col < vet.length; col++ ) {
-				System.out.print("   ");
+				if(vet[lin][col] != null) {
+					System.out.print(" "+vet[lin][col]+" ");
+				}else {
+					
+					System.out.print("   ");
+				}
 				tracoVertical();
 			}
 			enter();
@@ -160,8 +301,17 @@ public class BatalhaNaval {
 			System.out.print(lin+"  ");
 			for(int col = 0; col < vet.length; col++ ) {
 				tracoVertical();
-				if(jogada[0] == lin && jogada[1] == col && valido == 1) {
-					System.out.print(" "+vet[lin][col]+" ");
+				if(jogada[0] == lin && jogada[1] == col) {
+					
+					/*Se a posição indicada pelo jogador na matriz tiver um barco ele retorna o valor
+					 * se não, ele retorna 0 indicando que não tem barco*/
+					if(valido == 1) {
+						
+						System.out.print(" "+vet[lin][col]+" ");
+					}else {
+						vet[lin][col] = "0";
+						System.out.print(" "+vet[lin][col]+" ");
+					}
 				}else {
 					System.out.print("   ");
 				}
@@ -179,23 +329,28 @@ public class BatalhaNaval {
 	public static void posicaoDosBarcosHorizontal(int lin, int col, int tipoBarco, String[][] vet) {
 		switch(tipoBarco) {
 			case 1:
-				for (int i = col; i < 5; i++) {
-					vet[lin][i] = "X";
+				for (int i = 0; i < 5; i++) {
+					
+					vet[lin][col] = "X";
+					col++;
 				}
 				break;
 			case 2:
-				for (int i = col; i < 4; i++) {
-					vet[lin][i] = "X";
+				for (int i = 0; i < 4; i++) {
+					vet[lin][col] = "X";
+					col++;
 				}
 				break;
 			case 3:
-				for (int i = col; i < 3; i++) {
-					vet[lin][i] = "X";
+				for (int i = 0; i < 3; i++) {
+					vet[lin][col] = "X";
+					col++;
 				}
 				break;
 			case 4:
-				for (int i = col; i < 2; i++) {
-					vet[lin][i] = "X";
+				for (int i = 0; i < 2; i++) {
+					vet[lin][col] = "X";
+					col++;
 				}
 				break;
 			default:
@@ -208,23 +363,27 @@ public class BatalhaNaval {
 	public static void posicaoDosBarcosVertical(int lin, int col, int tipoBarco, String[][] vet) {
 		switch(tipoBarco) {
 			case 1:
-				for (int i = lin; i <= 5; i++) {
-					vet[i][col] = "X";
+				for (int i = 0; i <= 5; i++) {
+					vet[lin][col] = "X";
+					lin++;
 				}
 				break;
 			case 2:
-				for (int i = lin; i <= 4; i++) {
-					vet[i][col] = "X";
+				for (int i = 0; i <= 4; i++) {
+					vet[lin][col] = "X";
+					lin++;
 				}
 				break;
 			case 3:
-				for (int i = lin; i <= 3; i++) {
-					vet[i][col] = "X";
+				for (int i = 0; i <= 3; i++) {
+					vet[lin][col] = "X";
+					lin++;
 				}
 				break;
 			case 4:
-				for (int i = lin; i <= 2; i++) {
-					vet[i][col] = "X";
+				for (int i = 0; i <= 2; i++) {
+					vet[lin][col] = "X";
+					lin++;
 				}
 				break;
 			default:
