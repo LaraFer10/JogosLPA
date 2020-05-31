@@ -7,6 +7,7 @@ public class BatalhaNaval {
 	public static void main(String[] args) {
 		int opt;
 		String[] vetUsuarios = new String[2]; 
+		String[][] tabuleiroPlay1 = new String[10][10];
 		
 		//Identifica os usuarios retornando um vetor de nomes
 		vetUsuarios = identificaUsuario();
@@ -26,7 +27,7 @@ public class BatalhaNaval {
 			}
 			if(opt == 2) {
 				
-				System.out.println("Batalha Naval");
+				exibirTabuleiro(tabuleiroPlay1);
 			}
 			if(opt == 3) {
 				
@@ -122,21 +123,23 @@ public class BatalhaNaval {
 	}
 	
 	//exibi o tabuleiro para posicionar os barcos ou efetuar jogada
-	public static void exibirTabuleiro(String[][] vet, int[] numero ) {
+	public static void exibirTabuleiro(String[][] vet) {
+		System.out.print("     ");
 		for (int i = 0; i < vet.length; i++) {
-			System.out.print(i+" ");
+			System.out.print(i+"   ");
 		}
 		enter();
 		for (int lin = 0; lin < vet.length; lin++) {
-			System.out.println("------------------------------------------------------------");
-			System.out.print(lin+" ");
+			System.out.println("   -----------------------------------------");
+			System.out.print(lin+"  ");
+			tracoVertical();				
 			for(int col = 0; col < vet.length; col++ ) {
-				tracoVertical();				
-				System.out.println("   ");
+				System.out.print("   ");
 				tracoVertical();
 			}
-			
+			enter();
 		}
+		System.out.println("   -----------------------------------------");
 		
 		
 	}
@@ -147,24 +150,27 @@ public class BatalhaNaval {
 		if(vet[jogada[0]][jogada[1]] != null) {
 			valido = 1;
 		}
+		System.out.println("     ");
 		for (int i = 0; i < vet.length; i++) {
-			System.out.print(i+" ");
+			System.out.print(i+"   ");
 		}
 		enter();
 		for (int lin = 0; lin < vet.length; lin++) {
-			System.out.println("------------------------------------------------------------");
-			System.out.print(lin+" ");
+			System.out.println("   -----------------------------------------");
+			System.out.print(lin+"  ");
 			for(int col = 0; col < vet.length; col++ ) {
 				tracoVertical();
 				if(jogada[0] == lin && jogada[1] == col && valido == 1) {
-					System.out.println(vet[lin][col]);
+					System.out.print(" "+vet[lin][col]+" ");
 				}else {
-					System.out.println(" ");
+					System.out.print("   ");
 				}
 				tracoVertical();
 			}
+			enter();
 			
 		}
+		System.out.println("   -----------------------------------------");
 		
 		
 	}
