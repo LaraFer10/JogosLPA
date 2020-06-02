@@ -16,11 +16,7 @@ public class Jogo {
 		do {
 			// Recebe a opção escolhida pelo usuario
 			opt = escolhaMenu(vetUsuarios);
-			//Verifica se o usuario digitou numeros negativos
-			if(opt < 0) {
-					
-				System.out.println("Opição incorreta!");
-			}
+			
 			if(opt == 1) {
 						
 				System.out.println("Jogo da Forca");
@@ -35,33 +31,55 @@ public class Jogo {
 			}
 					
 					
-		}while(opt < 4);
+		}while(opt > 0 && opt < 4);
 		System.out.println("##--- Fim! Esperamos que tenha se divertido! :) ---##");
 	}
 	
-	//Identifica os Usuarios que vao jogar e retorna um vetor com nomes para o main
-	public static String[] identificaUsuario() {
-		String[] usuarios = new String[2];
-		String respo;
-		Scanner input = new Scanner(System.in);
-		tracoHorizontal();
-		tracoVertical();
-		System.out.print("------ Bem-Vindo ao Jogos Divertidos! ------");
-		tracoVertical();
-		enter();
-		tracoHorizontal();
-		System.out.println("Identifique-se com seu Nome:");
-		usuarios[0] = input.next();
-		System.out.println("Existe outro jogador? (sim | nao)");
-		respo = input.next();
-		if(respo == "sim") {
-			System.out.println("Identifique o outro jogador com o Nome:");
-			usuarios[1] = input.next();
-		}else {
+	// Identifica os Usuarios que vao jogar e retorna um vetor com nomes para o main
+		public static String[] identificaUsuario() {
+			String[] usuarios = new String[2];
+			String respo;
+			int players;
+			String acesso;
+			// int codigoAcesso = 123;
+			Scanner input = new Scanner(System.in);
+			tracoHorizontal();
+			tracoVertical();
+			System.out.print("------ Bem-Vindo ao Jogos Divertidos! ------");
+			tracoVertical();
+			enter();
+			tracoHorizontal();
+			System.out.println("Identifique-se com seu Nome:");
+			usuarios[0] = input.next();
+
+			System.out.println("Informe o seu código de acesso:");
+			acesso = input.next();
+			// condição caso necessite informar senha salva no sistema. --Deletar caso não precise--
+			/*
+			 * int aux = 0; for (acesso = input.nextInt(), aux = 2; ((acesso !=
+			 * codigoAcesso) && aux <= 3); aux++) {
+			 * System.out.println("Você errou. Tente novamente:"); acesso = input.nextInt();
+			 * 
+			 * } if (acesso == codigoAcesso) { return usuarios; } else {
+			 * System.out.println("Fim das tentativas."); }
+			 */
+			System.out.println("Existe outro jogador? (sim | nao)");
+			respo = input.next();
+			switch (respo.toLowerCase().trim()) {
+			case "sim":
+				System.out.println("Identifique o nome do segundo jogador:");
+				usuarios[1] = input.next();
+				break;
+			case "nao":
+				System.out.println("Apenas um jogador selecionado.");
+				break;
+			default:
+				System.out.println("Opção inválida. Apenas um jogador será selecionado.");
+			}
+
 			return usuarios;
 		}
-		return usuarios;
-	}
+
 	
 	/*Printa na tela o menu junto com as opções escolhidas pelo usuario
 	* e retorna o numero digitado para a classe principal
