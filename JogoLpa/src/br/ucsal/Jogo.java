@@ -14,6 +14,7 @@ public class Jogo {
 		vetUsuarios = identificaUsuario();
 		// Leva o usuário para a execussão do jogo escolhido
 		do {
+			
 			// Recebe a opção escolhida pelo usuario
 			opt = escolhaMenu(vetUsuarios);
 			
