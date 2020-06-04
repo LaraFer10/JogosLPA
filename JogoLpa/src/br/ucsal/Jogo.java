@@ -7,128 +7,144 @@ import java.util.Scanner;
 public class Jogo {
 
 	public static void main(String[] args) {
-		int opt;
-		String[] vetUsuarios = new String[2]; 
+		Scanner input = new Scanner(System.in);
+		int opt = 0;
+		String[] vetUsuarios = new String[2];
+
+		// Identifica os usuarios retornando um vetor de nomes
+		identificaUsuario();
 		
-		//Identifica os usuarios retornando um vetor de nomes
-		vetUsuarios = identificaUsuario();
-		// Leva o usuário para a execussão do jogo escolhido
-		do {
-			
-			// Recebe a opção escolhida pelo usuario
-			opt = escolhaMenu(vetUsuarios);
-			
-			if(opt == 1) {
-						
-				System.out.println("Jogo da Forca");
-			}
-			if(opt == 2) {
-						
-				System.out.println("Batalha Naval");
-			}
-			if(opt == 3) {
-						
-				System.out.println("Campo Minado");
-			}
-					
-					
-		}while(opt > 0 && opt < 4);
-		System.out.println("##--- Fim! Esperamos que tenha se divertido! :) ---##");
+		// mostra o Menu de Jogos e recebe a opção escolhida pelo usuario
+		escolhaMenu();
+
+		
 	}
-	
+
 	// Identifica os Usuarios que vao jogar e retorna um vetor com nomes para o main
-		public static String[] identificaUsuario() {
-			String[] usuarios = new String[2];
-			String respo;
-			int players;
-			String acesso;
-			// int codigoAcesso = 123;
-			Scanner input = new Scanner(System.in);
-			tracoHorizontal();
-			tracoVertical();
-			System.out.print("------ Bem-Vindo ao Jogos Divertidos! ------");
-			tracoVertical();
-			enter();
-			tracoHorizontal();
-			System.out.println("Identifique-se com seu Nome:");
-			usuarios[0] = input.next();
+	public static void identificaUsuario() {
+		String[] usuarios = new String[2];
+		String respo;
+		int players;
+		String acesso;
+		Scanner input = new Scanner(System.in);
+		tracoHorizontal();
+		tracoVertical();
+		imprimir("------ Bem-Vindo ao Jogos Divertidos! ------");
+		tracoVertical();
+		enter();
+		tracoHorizontal();
+		imprimirln("Identifique-se com seu Nome:");
+		usuarios[0] = input.next();
 
-			System.out.println("Informe o seu código de acesso:");
-			acesso = input.next();
-			// condição caso necessite informar senha salva no sistema. --Deletar caso não precise--
-			/*
-			 * int aux = 0; for (acesso = input.nextInt(), aux = 2; ((acesso !=
-			 * codigoAcesso) && aux <= 3); aux++) {
-			 * System.out.println("Você errou. Tente novamente:"); acesso = input.nextInt();
-			 * 
-			 * } if (acesso == codigoAcesso) { return usuarios; } else {
-			 * System.out.println("Fim das tentativas."); }
-			 */
-			System.out.println("Existe outro jogador? (sim | nao)");
-			respo = input.next();
-			switch (respo.toLowerCase().trim()) {
-			case "sim":
-				System.out.println("Identifique o nome do segundo jogador:");
-				usuarios[1] = input.next();
-				break;
-			case "nao":
-				System.out.println("Apenas um jogador selecionado.");
-				break;
-			default:
-				System.out.println("Opção inválida. Apenas um jogador será selecionado.");
-			}
+		imprimirln("Informe o seu código de acesso:");
+		acesso = input.next();
+	
+		imprimirln("Existe outro jogador? (sim | nao)");
+		respo = input.next();
+		switch (respo.toLowerCase().trim()) {
+		case "sim":
+			imprimirln("Identifique o nome do segundo jogador:");
+			usuarios[1] = input.next();
+			break;
+		case "nao":
+			imprimirln("Apenas um jogador selecionado.");
+			break;
+		default:
+			imprimirln("Opção inválida. Apenas um jogador será selecionado.");
+		}
+		if (usuarios[1] != null) {
 
-			return usuarios;
+			imprimirln("## Bem-Vindos(as) " + usuarios[0] + " e " + usuarios[1] + " ##");
+		} else {
+			imprimirln("## Bem-Vindo(a) " + usuarios[0] + " ##");
 		}
 
-	
-	/*Printa na tela o menu junto com as opções escolhidas pelo usuario
-	* e retorna o numero digitado para a classe principal
-	*/
-	public static int escolhaMenu(String[] usuarios) {
+	}
+
+	/*
+	 * Printa na tela o menu opções escolhidas pelo usuario e retorna o numero
+	 * digitado para a classe principal
+	 */
+
+	public static void escolhaMenu() {
 		Scanner input = new Scanner(System.in);
 		int opcao;
-		if(usuarios[1]!= null) {
-			
-			System.out.println("## Bem-Vindos(as) "+usuarios[0]+" e "+usuarios[1]+" ##");
-		}else {
-			System.out.println("## Bem-Vindo(a) "+usuarios[0]+" ##");
-		}
-		System.out.println("##-------- Este é o menu de jogos! --------##");
+		imprimirln("##-------- Este é o menu de jogos! --------##");
 		tracoHorizontal();
 		tracoVertical();
-		System.out.print("(1) Jogo da Forca                           ");
+		imprimir("(1) Jogo da Forca                           ");
 		tracoVertical();
 		enter();
 		tracoVertical();
-		System.out.print("(2) Batalha Naval                           ");
+		imprimir("(2) Batalha Naval                           ");
 		tracoVertical();
 		enter();
 		tracoVertical();
-		System.out.print("(3) Campo Minado                            ");
+		imprimir("(3) Campo Minado                            ");
 		tracoVertical();
 		enter();
 		tracoVertical();
-		System.out.print("(4) Sair                                    ");
+		imprimir("(4) Sair                                    ");
 		tracoVertical();
 		enter();
 		tracoHorizontal();
-		System.out.println("Escolha uma opção:");
+
+		imprimirln("Escolha uma opção");
 		opcao = input.nextInt();
-		return opcao;
+		while (opcao < 1 || opcao > 4){
+			
+			imprimirln("por favor, informe uma opção válida:");
+			opcao = input.nextInt();
+		
+		}
+		// Leva o usuário para a execussão do jogo escolhido
+			iniciandoJogos(opcao);
+
 	}
-	//Printa os traços VERTICAIS do menu
+
+	public static void iniciandoJogos(int opt) {
+		// acesso aos jogos
+		if (opt == 1) {
+
+			imprimirln("\nJogo da Forca selecionado\n");
+		}
+		if (opt == 2) {
+			imprimirln("\nBatalha Naval selecionado.\n");
+
+		}
+
+		if (opt == 3) {
+
+			imprimirln("\nCampo Minado selecionado\n");
+			
+		}
+		imprimirln("##--- Fim! Esperamos que tenha se divertido! :) ---##");
+
+	}
+
+	// Printa os traços VERTICAIS do menu
 	public static void tracoVertical() {
-		System.out.print("|");
+		imprimir("|");
 	}
-	//Printa os traços HORIZONTAIS do menu
+
+	// Printa os traços HORIZONTAIS do menu
 	public static void tracoHorizontal() {
-		System.out.println("|--------------------------------------------|");
+		imprimirln("|--------------------------------------------|");
 	}
-	//Enter para exibição das opções do menu
+
+	// Enter para exibição das opções do menu
 	public static void enter() {
-		System.out.print("\n");
+		imprimir("\n");
 	}
-
+	public static void imprimir(String txt) {
+		System.out.print(txt);
+	}
+	public static void imprimirln(String txt) {
+		System.out.println(txt);
+	}
+	public static void cls()
+    {
+        for(int i = 0; i < 25; i++)
+        System.out.println("");
+    }
 }
-
