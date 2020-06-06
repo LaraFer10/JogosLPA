@@ -62,7 +62,7 @@ public class BatalhaNaval {
 					barco = input.nextInt();
 					
 					/*Verifica se o barco ja foi adicionado	ao tabuleiro, senão ele é adicionado 
-					 * ao vetor de barcos do jogador e adicionado ao tabuleiro usando o processo de empilhamento*/
+					 * ao vetor de barcos do jogador e adicionado ao tabuleiro usando o processo de empilhamento
 					
 					for (int i = 0; i < numeroDeBarcos.length; i++) {
 						if(barco == numeroDeBarcos[i]) {
@@ -94,6 +94,7 @@ public class BatalhaNaval {
 						
 						System.out.println("Este barco ja foi escolhido!");	
 					}else {
+					 * */
 						
 						System.out.println("Escolha a LINHA e a COLUNA:");
 						lin = input.nextInt();
@@ -105,7 +106,7 @@ public class BatalhaNaval {
 						}else if(posicao == 2) {
 							posicaoDosBarcosHorizontal(lin, col, barco, tabuleiroPlay1);
 						}
-					}
+					
 					
 					quantBarco++;
 					
