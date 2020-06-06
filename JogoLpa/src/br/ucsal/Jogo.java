@@ -67,38 +67,35 @@ public class Jogo {
 	 */
 
 	public static void escolhaMenu() {
-		Scanner input = new Scanner(System.in);
 		int opcao;
-		imprimirln("##-------- Este é o menu de jogos! --------##");
-		tracoHorizontal();
-		tracoVertical();
-		imprimir("(1) Jogo da Forca                           ");
-		tracoVertical();
-		enter();
-		tracoVertical();
-		imprimir("(2) Batalha Naval                           ");
-		tracoVertical();
-		enter();
-		tracoVertical();
-		imprimir("(3) Campo Minado                            ");
-		tracoVertical();
-		enter();
-		tracoVertical();
-		imprimir("(4) Sair                                    ");
-		tracoVertical();
-		enter();
-		tracoHorizontal();
-
-		imprimirln("Escolha uma opção");
-		opcao = input.nextInt();
-		while (opcao < 1 || opcao > 4){
-			
-			imprimirln("por favor, informe uma opção válida:");
+		do {
+			Scanner input = new Scanner(System.in);
+			imprimirln("##-------- Este é o menu de jogos! --------##");
+			tracoHorizontal();
+			tracoVertical();
+			imprimir("(1) Jogo da Forca                           ");
+			tracoVertical();
+			enter();
+			tracoVertical();
+			imprimir("(2) Batalha Naval                           ");
+			tracoVertical();
+			enter();
+			tracoVertical();
+			imprimir("(3) Campo Minado                            ");
+			tracoVertical();
+			enter();
+			tracoVertical();
+			imprimir("(4) Sair                                    ");
+			tracoVertical();
+			enter();
+			tracoHorizontal();
+	
+			imprimirln("Escolha uma opção");
 			opcao = input.nextInt();
 		
-		}
 		// Leva o usuário para a execussão do jogo escolhido
 			iniciandoJogos(opcao);
+		}while (opcao < 1 || opcao > 4);
 
 	}
 
