@@ -95,8 +95,8 @@ public class BatalhaNaval {
 						
 				}
 				
-				
-				
+				//Reinicia o menu principal do jogo
+				Jogo.main(args);
 			
 			
 		

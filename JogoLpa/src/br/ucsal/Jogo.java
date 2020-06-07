@@ -101,7 +101,7 @@ public class Jogo {
 		}
 		if (opt == 2) {
 			imprimirln("\nBatalha Naval selecionado.\n");
-
+			BatalhaNaval.main(null);
 		}
 
 		if (opt == 3) {
