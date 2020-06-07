@@ -1,241 +1,107 @@
 package br.ucsal;
 
+import java.io.Console;
 import java.util.Scanner;
 
 public class BatalhaNaval {
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		int opt;
-		String[] vetUsuarios = new String[2]; 
+		
 		/*---- BATALHA NAVAL ----*/
 		String[][] tabuleiroPlay1 = new String[10][10];
 		String[][] tabuleiroPlay2 = new String[10][10];
 		int [] jogada = new int[2];
-		int[] numeroDeBarcos = new int[4];
+		int[] numeroDeBarcos1 = new int[4];
+		int[] numeroDeBarcos2 = new int[4];
 		int lin, col, posicao, barco = 0, quantBarco = 0, cont = 0;
 		
-		//Identifica os usuarios retornando um vetor de nomes
-		vetUsuarios = identificaUsuario();
 		
-		// Leva o usuário para a execussão do jogo escolhido
-		do {
-			// Recebe a opção escolhida pelo usuario
-			opt = escolhaMenu(vetUsuarios);
-			//Verifica se o usuario digitou numeros negativos
-			if(opt < 0) {
-				
-				System.out.println("Opição incorreta!");
-			}
-			if(opt == 1) {
-				
-				System.out.println("Jogo da Forca");
-			}
-			if(opt == 2) {
 				
 				//Esta condição garante que o jogador1 so terá 4 barcos
 				while(quantBarco < 4) {
+					
 					exibirTabuleiro(tabuleiroPlay1);
 					System.out.println("##- Jogador 1 (escolha a posição dos barcos) -##");
 					tracoHorizontal();
 					tracoVertical();
-					System.out.print("(1) Porta aviões                           ");
+					System.out.print("(1) Porta aviões (5 quadrados);             ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(2) Navio Tanque                           ");
+					System.out.print("(2) Navio Tanque (4 quadrados);             ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(3) Contratorpedeiros                      ");
+					System.out.print("(3) Contratorpedeiros (3 quadrados);        ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(4) Submarinos                             ");
+					System.out.print("(4) Submarinos (2 quadrados);               ");
 					tracoVertical();
 					enter();
 					tracoHorizontal();
 					System.out.println("Escolha um BARCO:");
-					if(barco != 0) {
-						barco = 0;
-					}
+					
 					barco = input.nextInt();
 					
-					/*Verifica se o barco ja foi adicionado	ao tabuleiro, senão ele é adicionado 
-					 * ao vetor de barcos do jogador e adicionado ao tabuleiro usando o processo de empilhamento
+					System.out.println("Escolha a LINHA e a COLUNA:");
+					lin = input.nextInt();
+					col = input.nextInt();
+					System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
+					posicao = input.nextInt();
 					
-					for (int i = 0; i < numeroDeBarcos.length; i++) {
-						if(barco == numeroDeBarcos[i]) {
-							cont = 1;
-						}
-						if(i != 0) {
-							//se o barco ja tiver sido add então não passa pelo processo de empilhamento
-							if(cont != 1) {
-								
-								//se o vetor na posição anterior a posição atual é 'vazio' para poder add o barco
-								if(numeroDeBarcos[i-1] == 0) {
-									numeroDeBarcos[i-1] = barco;
-								}else if(numeroDeBarcos[i] == 0){
-									//se o vetor na posição atual é 'vazio' para poder add o barco
-									numeroDeBarcos[i] = barco;
-								}else if(numeroDeBarcos[i+1] == 0) {
-									//se o vetor na posição a frente a posição atual é 'vazio' para poder add o barco
-									numeroDeBarcos[i+1] = barco;
-								}
-							}
-						}else {
-							if(numeroDeBarcos[i] == 0){
-								numeroDeBarcos[i] = barco;
-							}
-						}
-					}
-					
-					if(cont == 1) {
+					quantBarco = adicionaBarcos(posicao, barco, col, lin, quantBarco, tabuleiroPlay1, numeroDeBarcos1);
 						
-						System.out.println("Este barco ja foi escolhido!");	
-					}else {
-					 * */
 						
-						System.out.println("Escolha a LINHA e a COLUNA:");
-						lin = input.nextInt();
-						col = input.nextInt();
-						System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
-						posicao = input.nextInt();
-						if(posicao == 1) {
-							posicaoDosBarcosVertical(lin, col, barco, tabuleiroPlay1);
-						}else if(posicao == 2) {
-							posicaoDosBarcosHorizontal(lin, col, barco, tabuleiroPlay1);
-						}
-					
-					
-					quantBarco++;
-					
 				}
 					
 				//Esta condição garante que o jogador2 so terá 4 barcos
-
-				for (int i = 0; i < numeroDeBarcos.length; i++) {
+				quantBarco = 0;
+				while(quantBarco < 4) {
 					exibirTabuleiro(tabuleiroPlay2);
 					System.out.println("##- Jogador 2 (escolha a posição dos barcos) -##");
 					tracoHorizontal();
 					tracoVertical();
-					System.out.print("(1) Porta aviões                           ");
+					System.out.print("(1) Porta aviões (5 quadrados);             ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(2) Navio Tanque                           ");
+					System.out.print("(2) Navio Tanque (4 quadrados);             ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(3) Contratorpedeiros                      ");
+					System.out.print("(3) Contratorpedeiros (3 quadrados);        ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(4) Submarinos                             ");
+					System.out.print("(4) Submarinos (2 quadrados);               ");
 					tracoVertical();
 					enter();
 					tracoHorizontal();
 					System.out.println("Escolha um BARCO:");
-					if(barco != 0) {
-						barco = 0;
-					}
+					
 					barco = input.nextInt();
-					//Verifica se o barco ja foi adicionado	
-					if(barco != numeroDeBarcos[i]) {
-						System.out.println("Escolha a LINHA e a COLUNA:");
-						lin = input.nextInt();
-						col = input.nextInt();
-						System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
-						posicao = input.nextInt();
-						if(posicao == 1) {
-							posicaoDosBarcosVertical(lin, col, barco, tabuleiroPlay2);
-						}else if(posicao == 2) {
-							posicaoDosBarcosHorizontal(lin, col, barco, tabuleiroPlay2);
-						}
-								
-								
-					}else {
-						System.out.println("Este barco ja foi escolhido!");
-								
-					}
+					
+					
+					System.out.println("Escolha a LINHA e a COLUNA:");
+					lin = input.nextInt();
+					col = input.nextInt();
+					System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
+					posicao = input.nextInt();
+					
+					quantBarco = adicionaBarcos(posicao, barco, col, lin, quantBarco, tabuleiroPlay2, numeroDeBarcos2);
 					
 						
 				}
 				
 				
 				
-			}
-			
-			if(opt == 3) {
-				
-				System.out.println("Campo Minado");
-			}
 			
 			
-		}while(opt < 4);
-		System.out.println("##--- Fim! Esperamos que tenha se divertido! :) ---##");
 		
 	}
 	
-	//Identifica os Usuarios que vao jogar e retorna um vetor com nomes para o main
-	public static String[] identificaUsuario() {
-		String[] usuarios = new String[2];
-		String respo;
-		Scanner input = new Scanner(System.in);
-		tracoHorizontal();
-		tracoVertical();
-		System.out.print("------ Bem-Vindo ao Jogos Divertidos! ------");
-		tracoVertical();
-		enter();
-		tracoHorizontal();
-		System.out.println("Identifique-se com seu Nome:");
-		usuarios[0] = input.next();
-		System.out.println("Existe outro jogador? (sim | nao)");
-		respo = input.next();
-		if(respo == "sim") {
-			System.out.println("Identifique o outro jogador com o Nome:");
-			usuarios[1] = input.next();
-		}else {
-			return usuarios;
-		}
-		return usuarios;
-	}
-	
-	/*Printa na tela o menu junto com as opções escolhidas pelo usuario
-	* e retorna o numero digitado para a classe principal
-	*/
-	public static int escolhaMenu(String[] usuarios) {
-		Scanner input = new Scanner(System.in);
-		int opcao;
-		if(usuarios[1]!= null) {
-			
-			System.out.println("## Bem-Vindos(as) "+usuarios[0]+" e "+usuarios[1]+" ##");
-		}else {
-			System.out.println("## Bem-Vindo(a) "+usuarios[0]+" ##");
-		}
-		System.out.println("##-------- Este é o menu de jogos! --------##");
-		tracoHorizontal();
-		tracoVertical();
-		System.out.print("(1) Jogo da Forca                           ");
-		tracoVertical();
-		enter();
-		tracoVertical();
-		System.out.print("(2) Batalha Naval                           ");
-		tracoVertical();
-		enter();
-		tracoVertical();
-		System.out.print("(3) Campo Minado                            ");
-		tracoVertical();
-		enter();
-		tracoVertical();
-		System.out.print("(4) Sair                                    ");
-		tracoVertical();
-		enter();
-		tracoHorizontal();
-		System.out.println("Escolha uma opção:");
-		opcao = input.nextInt();
-		return opcao;
-	}
 	//Printa os traços VERTICAIS do menu
 	public static void tracoVertical() {
 		System.out.print("|");
@@ -253,10 +119,73 @@ public class BatalhaNaval {
 	
 	//Verifica se o numero de jogadores é valido para executar o jogo e retorna um valor booleano
 	public static boolean definirJogadores(String[] vet) {
-		if(vet.length == 2) {
+		if(vet[1] != null) {
 			return true;
 		}
 		return false;
+	}
+	
+	public static int adicionaBarcos(int posicao, int barco, int col, int lin, int quantBarco, String[][] tabuleiro, int[] numeroDeBarcos) {
+		
+		if(posicao == 1) {
+			//Verifica se a posição indicada pelo jogador é compativel com o tamanho do barco
+			if(verificaPosicaoVertical(col, tabuleiro, barco)) {
+				//Verifica se na posição indicada ja existe um barco para que não tenha sobreescrita
+				if(verificaSobreescrita(barco, lin, col, tabuleiro)) {
+					// Verifica se um barco ja existe no tabuleiro
+					if(verificaBarcoExiste(barco, numeroDeBarcos)) {
+					
+						posicaoDosBarcosVertical(lin, col, barco, tabuleiro);
+						quantBarco++;
+						
+					}else {
+						System.out.println("Este barco já foi escolhido!");
+					}
+					
+				}else {
+					System.out.println("Já existe um barco nesta posição!");
+				}
+				
+			}else {
+				System.out.println("Posição inválida, verifique a posição digitada!");
+			}
+		}else if(posicao == 2) {
+			if(verificaPosicaoHorizontal(col, tabuleiro, barco)) {
+				if(verificaSobreescrita(barco, lin, col, tabuleiro)) {
+					
+					posicaoDosBarcosHorizontal(lin, col, barco, tabuleiro);
+					quantBarco++;
+					
+				}else {
+					System.out.println("Já existe um barco nesta posição!");
+				}
+			}else {
+				System.out.println("Posição inválida, verifique a posição digitada!");
+			}
+		}
+		
+		return quantBarco;
+	}
+	
+	public static boolean verificaBarcoExiste(int barco, int[] barcos) {
+		int valida=0, posicao;
+		for (int i = 0; i < barcos.length; i++) {
+			if(barcos[i] == 0) {
+				valida++;
+			}else if(barcos[i] != barco) {
+				valida++;
+			}else if(barcos[i] == barco) {
+				
+				return false;
+			}
+			
+		}
+	
+			posicao = 4 - valida;
+			barcos[posicao] = barco;
+			return true;
+
+		
 	}
 	
 	//exibi o tabuleiro para posicionar os barcos ou efetuar jogada
@@ -325,6 +254,141 @@ public class BatalhaNaval {
 		
 		
 	}
+	
+	// Verifica se o barco vai sobreescrever a posicao de um outro barco no tabuleiro
+	
+	public static boolean verificaSobreescrita(int tipoBarco, int lin, int col, String[][] vet) {
+		int validaV=0, validaH=0;
+		if(tipoBarco == 1) {
+			for (int i = 0; i < 5; i++) {
+				
+				if(vet[lin][col]!= null) {
+					validaH++;
+				}
+				col++;
+			}
+			for (int i = 0; i < 5; i++) {
+				
+				if(vet[lin][col]!= null) {
+					validaV++;
+				}
+				lin++;
+			}
+			if(validaH <= 5 && validaH!=0 || validaV <= 5 && validaV!=0) {
+				return false;
+			}else {
+				return true;
+			}
+			
+		}else if(tipoBarco == 2) {
+			
+			for (int i = 0; i < 4; i++) {
+				
+				if(vet[lin][col]!= null) {
+					validaH++;
+				}
+				col++;
+			}
+			for (int i = 0; i < 4; i++) {
+				
+				if(vet[lin][col]!= null) {
+					validaV++;
+				}
+				lin++;
+			}
+			if(validaH <= 4 && validaH!=0 || validaV <= 4 && validaV!=0) {
+				return false;
+			}else {
+				return true;
+			}
+			
+			
+		}else if(tipoBarco == 3) {
+			for (int i = 0; i < 3; i++) {
+				
+				if(vet[lin][col]!= null) {
+					validaH++;
+				}
+				col++;
+			}
+			for (int i = 0; i < 3; i++) {
+				
+				if(vet[lin][col]!= null) {
+					validaV++;
+				}
+				lin++;
+			}
+			if(validaH <= 3 && validaH!=0 || validaV <= 3 && validaV!=0) {
+				return false;
+			}else {
+				return true;
+			}
+			
+			
+		}else if(tipoBarco == 4) {
+			for (int i = 0; i < 2; i++) {
+				
+				if(vet[lin][col]!= null) {
+					validaH++;
+				}
+				col++;
+			}
+			for (int i = 0; i < 2; i++) {
+				
+				if(vet[lin][col]!= null) {
+					validaV++;
+				}
+				lin++;
+			}
+			if(validaH <= 2 && validaH!=0 || validaV <= 2 && validaV!=0) {
+				return false;
+			}
+				return true;
+			
+			
+		}
+		return false;
+		
+	}
+	
+	public static boolean verificaPosicaoHorizontal(int col, String[][] vet, int barco) {
+		
+		int verificaCol = col;
+		if(barco ==1 ) {
+			for (int i = 0; i <= 5; i++) {
+				verificaCol++;
+			}
+			if(verificaCol < vet.length-1) {
+				return true;
+			}
+			return false;
+		}else if(barco == 2) {
+			for (int i = 0; i <= 4; i++) {
+				verificaCol++;
+			}
+			if(verificaCol < vet.length-1) {
+				return true;
+			}
+			return false;
+		}else if(barco == 3) {
+			for (int i = 0; i <= 3; i++) {
+				verificaCol++;
+			}
+			if(verificaCol < vet.length-1) {
+				return true;
+			}
+			return false;
+		}
+		for (int i = 0; i <= 2; i++) {
+			verificaCol++;
+		}
+		if(verificaCol < vet.length-1) {
+			return true;
+		}
+		return false;
+		
+	}
+	
 
 	//Metodo é chamado apos usuario identificar se deseja posicionar o barco na HORIZONTAL
 	public static void posicaoDosBarcosHorizontal(int lin, int col, int tipoBarco, String[][] vet) {
@@ -360,10 +424,50 @@ public class BatalhaNaval {
 		}
 	}
 	
+	public static boolean verificaPosicaoVertical(int lin, String[][] vet, int barco) {
+		
+		int verificaLin = lin;
+		if(barco == 1) {
+			for (int i = 0; i <= 5; i++) {
+				verificaLin++;
+			}
+			if(verificaLin < vet.length) {
+				return true;
+			}
+			return false;
+		}else if(barco == 2) {
+			for (int i = 0; i <= 4; i++) {
+				verificaLin++;
+			}
+			if(verificaLin < vet.length) {
+				return true;
+			}
+			return false;
+		}else if(barco == 3) {
+			for (int i = 0; i <= 3; i++) {
+				verificaLin++;
+			}
+			if(verificaLin < vet.length) {
+				return true;
+			}
+			return false;
+		}
+		for (int i = 0; i <= 2; i++) {
+			verificaLin++;
+		}
+		if(verificaLin < vet.length) {
+			return true;
+		}
+		return false;
+		
+	}
+	
 	//Metodo é chamado apos usuario identificar se deseja posicionar o barco na VERTICAL
 	public static void posicaoDosBarcosVertical(int lin, int col, int tipoBarco, String[][] vet) {
+		
 		switch(tipoBarco) {
 			case 1:
+				
 				for (int i = 0; i <= 5; i++) {
 					vet[lin][col] = "X";
 					lin++;
