@@ -8,57 +8,57 @@ public class Jogo {
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
+		int opcao;
 		int opt = 0;
 		String[] vetUsuarios = new String[2];
-
-		// Identifica os usuarios retornando um vetor de nomes
-		identificaUsuario();
-		
-		// mostra o Menu de Jogos e recebe a opção escolhida pelo usuario
-		escolhaMenu();
-
-		
-	}
-
-	// Identifica os Usuarios que vao jogar e retorna um vetor com nomes para o main
-	public static void identificaUsuario() {
-		String[] usuarios = new String[2];
 		String respo;
 		int players;
 		String acesso;
-		Scanner input = new Scanner(System.in);
-		tracoHorizontal();
-		tracoVertical();
-		imprimir("------ Bem-Vindo ao Jogos Divertidos! ------");
-		tracoVertical();
-		enter();
-		tracoHorizontal();
-		imprimirln("Identifique-se com seu Nome:");
-		usuarios[0] = input.next();
-
-		imprimirln("Informe o seu código de acesso:");
-		acesso = input.next();
-	
-		imprimirln("Existe outro jogador? (sim | nao)");
-		respo = input.next();
-		switch (respo.toLowerCase().trim()) {
-		case "sim":
-			imprimirln("Identifique o nome do segundo jogador:");
-			usuarios[1] = input.next();
-			break;
-		case "nao":
-			imprimirln("Apenas um jogador selecionado.");
-			break;
-		default:
-			imprimirln("Opção inválida. Apenas um jogador será selecionado.");
+		
+		if(vetUsuarios[0] == null) {
+			// Identifica os usuarios retornando um vetor de nomes
+			
+			tracoHorizontal();
+			tracoVertical();
+			imprimir("------ Bem-Vindo ao Jogos Divertidos! ------");
+			tracoVertical();
+			enter();
+			tracoHorizontal();
+			imprimirln("Identifique-se com seu Nome:");
+			vetUsuarios[0] = input.next();
+			
+			imprimirln("Informe o seu código de acesso:");
+			acesso = input.next();
+			
+			imprimirln("Existe outro jogador? (sim | nao)");
+			respo = input.next();
+			switch (respo.toLowerCase().trim()) {
+			case "sim":
+				imprimirln("Identifique o nome do segundo jogador:");
+				vetUsuarios[1] = input.next();
+				break;
+			case "nao":
+				imprimirln("Apenas um jogador selecionado.");
+				break;
+			default:
+				imprimirln("Opção inválida. Apenas um jogador será selecionado.");
+			}
+			if (vetUsuarios[1] != null) {
+				
+				imprimirln("## Bem-Vindos(as) " + vetUsuarios[0] + " e " + vetUsuarios[1] + " ##");
+			} else {
+				imprimirln("## Bem-Vindo(a) " + vetUsuarios[0] + " ##");
+			}
+						
 		}
-		if (usuarios[1] != null) {
+		// mostra o Menu de Jogos e recebe a opção escolhida pelo usuario
+		do {
+		escolhaMenu();
+		opcao = input.nextInt();
+		iniciandoJogos(opcao);
+		}while (opcao < 1 || opcao > 4);
 
-			imprimirln("## Bem-Vindos(as) " + usuarios[0] + " e " + usuarios[1] + " ##");
-		} else {
-			imprimirln("## Bem-Vindo(a) " + usuarios[0] + " ##");
-		}
-
+		
 	}
 
 	/*
@@ -67,9 +67,6 @@ public class Jogo {
 	 */
 
 	public static void escolhaMenu() {
-		int opcao;
-		do {
-			Scanner input = new Scanner(System.in);
 			imprimirln("##-------- Este é o menu de jogos! --------##");
 			tracoHorizontal();
 			tracoVertical();
@@ -91,11 +88,8 @@ public class Jogo {
 			tracoHorizontal();
 	
 			imprimirln("Escolha uma opção");
-			opcao = input.nextInt();
 		
 		// Leva o usuário para a execussão do jogo escolhido
-			iniciandoJogos(opcao);
-		}while (opcao < 1 || opcao > 4);
 
 	}
 
