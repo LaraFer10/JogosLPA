@@ -45,6 +45,7 @@ public class JogoForca {
 			}
 		}
 		System.out.println("\n\nFIM DE JOGO");
+		Jogo.main(args);
 	}
 	
 	// Construçao da forca por array, linha 52: Parametro de espaço para separar os "_", linha 96: impressao da forca quando for chamado.

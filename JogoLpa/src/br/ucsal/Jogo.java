@@ -101,7 +101,7 @@ public class Jogo {
 		if (opt == 1) {
 			
 			imprimirln("\nJogo da Forca selecionado\n");
-
+			JogoForca.main(null);
 		}
 		if (opt == 2) {
 			imprimirln("\nBatalha Naval selecionado.\n");
