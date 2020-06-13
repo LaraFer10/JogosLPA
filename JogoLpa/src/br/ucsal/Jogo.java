@@ -29,11 +29,12 @@ public class Jogo {
 			
 			imprimirln("Informe o seu código de acesso:");
 			acesso = input.next();
-			
+			cls();
 			imprimirln("Existe outro jogador? (sim | nao)");
 			respo = input.next();
 			switch (respo.toLowerCase().trim()) {
 			case "sim":
+				cls();
 				imprimirln("Identifique o nome do segundo jogador:");
 				vetUsuarios[1] = input.next();
 				break;
@@ -44,9 +45,10 @@ public class Jogo {
 				imprimirln("Opção inválida. Apenas um jogador será selecionado.");
 			}
 			if (vetUsuarios[1] != null) {
-				
+				cls();
 				imprimirln("## Bem-Vindos(as) " + vetUsuarios[0] + " e " + vetUsuarios[1] + " ##");
 			} else {
+				cls();
 				imprimirln("## Bem-Vindo(a) " + vetUsuarios[0] + " ##");
 			}
 						
@@ -55,11 +57,20 @@ public class Jogo {
 		do {
 		escolhaMenu();
 		opcao = input.nextInt();
-		iniciandoJogos(opcao);
-		}while (opcao < 1 || opcao > 4);
+		cls();
+		iniciandoJogos(opcao, vetUsuarios);
+		}while (opcao > 0 && opcao < 4);
 
 		
 	}
+	//Verifica se o numero de jogadores é valido para executar o jogo e retorna um valor booleano
+	public static boolean definirJogadoresBatalhaNaval(String[] vet) {
+		if(vet[1] != null) {
+			return true;
+		}
+		return false;
+	}
+
 
 	/*
 	 * Printa na tela o menu opções escolhidas pelo usuario e retorna o numero
@@ -93,7 +104,7 @@ public class Jogo {
 
 	}
 
-	public static void iniciandoJogos(int opt) {
+	public static void iniciandoJogos(int opt, String[]vet) {
 		// acesso aos jogos
 		if (opt == 1) {
 
@@ -101,7 +112,13 @@ public class Jogo {
 		}
 		if (opt == 2) {
 			imprimirln("\nBatalha Naval selecionado.\n");
-			BatalhaNaval.main(null);
+			if(definirJogadoresBatalhaNaval(vet)) {
+				
+				BatalhaNaval.main(null);
+			}else {
+				System.out.println("Para jogar BATALHA NAVAL precisa de 2 jogadores logados!");
+			}
+
 		}
 
 		if (opt == 3) {
@@ -135,7 +152,7 @@ public class Jogo {
 	}
 	public static void cls()
     {
-        for(int i = 0; i < 25; i++)
-        System.out.println("");
+        for(int i = 0; i < 50; i++)
+        	System.out.println("");
     }
 }
