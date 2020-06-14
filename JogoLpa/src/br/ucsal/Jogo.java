@@ -104,7 +104,6 @@ public class Jogo {
 
 		// Leva o usuário para a execussão do jogo escolhido
 
-		imprimirln("##--- Fim! Esperamos que tenha se divertido! :) ---##");
 	}
 
 	public static void iniciandoJogos(int opt, String[]vet) {
@@ -118,12 +117,7 @@ public class Jogo {
 			imprimirln("\nBatalha Naval selecionado.\n");
 			if(definirJogadoresBatalhaNaval(vet)) {
 				
-				try {
-					BatalhaNaval.main(null);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				BatalhaNaval.main(null);
 			}else {
 				System.out.println("Para jogar BATALHA NAVAL precisa de 2 jogadores logados!");
 			}
@@ -135,6 +129,7 @@ public class Jogo {
 			imprimirln("\nCampo Minado selecionado\n");
 			
 		}
+		imprimirln("##--- Fim! Esperamos que tenha se divertido! :) ---##");
 
 	}
 

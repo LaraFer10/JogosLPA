@@ -1,11 +1,14 @@
 package br.ucsal;
 
 import java.io.Console;
+import java.sql.Time;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BatalhaNaval {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 
 		/*---- BATALHA NAVAL ----*/
@@ -19,7 +22,7 @@ public class BatalhaNaval {
 		int[] numeroDeBarcosAfundados1 = new int[4];
 		int[] numeroDeBarcosAfundados2 = new int[4];
 		int lin, col, posicao, barco = 0, quantBarco = 0, cont = 0, cont2 = 0, resposta = 0, acertos = 0, acertos2 = 0;
-		int retorno, quant=0;
+		int retorno, quant=0, fimJogo = 0;
 		
 
 		/* |---BARCOS---|
@@ -42,7 +45,6 @@ public class BatalhaNaval {
 
 		//Esta condição garante que o jogador1 so terá 4 barcos
 		while(quantBarco < 4) {
-			Jogo.cls();
 			exibirTabuleiro(tabuleiroPlay1);
 			System.out.println("##- Jogador 1 (escolha a posição dos barcos) -##");
 			tracoHorizontal();
@@ -81,11 +83,56 @@ public class BatalhaNaval {
 			col = input.nextInt();
 			System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
 			posicao = input.nextInt();
+			Jogo.cls();
 
 			/*O metodo adicionaBarcos() recebe os parametros e verifica se o barco ja foi adicionado
 				caso o barco não tenha sido adicionado, ele coloca o barco no tabuleiro e salva seu
 				codigo no vetor numeroDeBarcos1[]
 			*/
+			if(lin > 9 || col > 9) {
+				while(lin > 9 || col > 9) {
+					exibirTabuleiro(tabuleiroPlay1);
+					System.out.println("##- Jogador 1 (escolha a posição dos barcos) -##");
+					tracoHorizontal();
+					tracoVertical();
+					System.out.print("(1) Porta aviões (5 quadrados);             ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(2) Navio Tanque (4 quadrados);             ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(3) Contratorpedeiros (3 quadrados);        ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(4) Submarinos (2 quadrados);               ");
+					tracoVertical();
+					enter();
+					tracoHorizontal();
+					System.out.println("Escolha um BARCO:");
+	
+					barco = input.nextInt();
+					
+					if(barco > 4 || barco < 0) {
+						System.out.println("Opção inválida!");
+						while(barco > 4 || barco < 0) {
+							System.out.println("Escolha um BARCO:");
+	
+							barco = input.nextInt();
+						}
+					}
+					
+					System.out.println("Escolha a LINHA e a COLUNA:");
+					lin = input.nextInt();
+					col = input.nextInt();
+					System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
+					posicao = input.nextInt();
+				}
+				Jogo.cls();
+			}
+			
 			quantBarco = adicionaBarcos(posicao, barco, col, lin, quantBarco, tabuleiroPlay1, numeroDeBarcos1);
 
 			/*Adiciona as especificações dos barcos adicionados pelo JOGADOR 1 um para que
@@ -124,9 +171,8 @@ public class BatalhaNaval {
 		sleep();
 		//Esta condição garante que o jogador2 so terá 4 barcos
 		quantBarco = 0;
-		
+		Jogo.cls();
 		while(quantBarco < 4) {
-			Jogo.cls();
 			exibirTabuleiro(tabuleiroPlay2);
 			System.out.println("##- Jogador 2 (escolha a posição dos barcos) -##");
 			tracoHorizontal();
@@ -164,11 +210,56 @@ public class BatalhaNaval {
 			col = input.nextInt();
 			System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
 			posicao = input.nextInt();
+			Jogo.cls();
 
 			/*O metodo adicionaBarcos() recebe os parametros e verifica se o barco ja foi adicionado
 			caso o barco não tenha sido adicionado, ele coloca o barco no tabuleiro e salva seu
 			codigo no vetor numeroDeBarcos1[]
 		*/
+			if(lin > 9 || col > 9) {
+				System.out.println("Acho que você digitou errado, tente novamente.");
+				while(lin > 9 || col > 9) {
+					exibirTabuleiro(tabuleiroPlay2);
+					System.out.println("##- Jogador 2 (escolha a posição dos barcos) -##");
+					tracoHorizontal();
+					tracoVertical();
+					System.out.print("(1) Porta aviões (5 quadrados);             ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(2) Navio Tanque (4 quadrados);             ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(3) Contratorpedeiros (3 quadrados);        ");
+					tracoVertical();
+					enter();
+					tracoVertical();
+					System.out.print("(4) Submarinos (2 quadrados);               ");
+					tracoVertical();
+					enter();
+					tracoHorizontal();
+					System.out.println("Escolha um BARCO:");
+
+					barco = input.nextInt();
+
+					if(barco > 4 || barco < 0) {
+						System.out.println("Opção inválida!");
+						while(barco > 4 || barco < 0) {
+							System.out.println("Escolha um BARCO:");
+
+							barco = input.nextInt();
+						}
+					}
+					System.out.println("Escolha a LINHA e a COLUNA:");
+					lin = input.nextInt();
+					col = input.nextInt();
+					System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
+					posicao = input.nextInt();
+				}
+				Jogo.cls();
+
+			}
 			quantBarco = adicionaBarcos(posicao, barco, col, lin, quantBarco, tabuleiroPlay2, numeroDeBarcos2);
 			
 			/*Adiciona as especificações dos barcos adicionados pelo JOGADOR 1 um para que
@@ -206,7 +297,7 @@ public class BatalhaNaval {
 		sleep();
 		
 		//Inicia o jogo com as rodadas alternadas 
-		while ((acertos < 15) || (acertos2 < 15)) { 
+		while (fimJogo == 0) { 
 			if (cont == 3) {
 				cont = 0;
 			} else if (cont == 1) {
@@ -225,7 +316,9 @@ public class BatalhaNaval {
 				Jogo.cls();
 				//Chama o metodo para efetuar jogadas e retorna o incremento de acertos
 				acertos = efetuarJogada(tabuleiroPlay2, tabuleiroJog2, jogada, acertos);
-				
+				if(acertos == 14) {
+					fimJogo = 1;
+				}
 				//Esta condição verifica se o JOGADOR 1 conseguiu afundar algum barco inimigo
 				for (int i = 0; i < 4; i++) {
 					if(i==0) {
@@ -310,9 +403,12 @@ public class BatalhaNaval {
 				Jogo.cls();
 				//Chama o metodo para efetuar jogadas e retorna o incremento de acertos
 				acertos2 = efetuarJogada(tabuleiroPlay1, tabuleiroJog1, jogada, acertos2);
-				
+				if(acertos2 == 14) {
+					fimJogo = 1;
+				}
 				//Esta condição verifica se o JOGADOR 1 conseguiu afundar algum barco inimigo
 				for (int i = 0; i < 4; i++) {
+					quant = 0;
 					if(i==0) {
 						if(numeroDeBarcosAfundados2[i] == 0) {
 							retorno=verificaBarco(portaAvioes, tabuleiroJog1);
@@ -426,10 +522,16 @@ public class BatalhaNaval {
 		System.out.print("\n");
 	}
 	
-	public static void sleep() throws InterruptedException {
-		Thread sleep = new Thread();
+	public static void sleep() {
 		
-		sleep.wait(3000);;
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*Timer timer = new Timer();
+        timer.schedule(null, 3000);;*/
 	}
 
 	/*-------------------------------------- BATALHA NAVAL (( INICIO )) --------------------------------------------*/
@@ -709,21 +811,24 @@ public class BatalhaNaval {
 			if(col < 9) {
 
 				for (int i = 0; i < 5; i++) {
-
-					if(vet[lin][c]!= null) {
-						validaH++;
+					if(c <=9) {
+						
+						if(vet[lin][c]!= null) {
+							validaH++;
+						}
+						c++;
 					}
-					c++;
 				}
 			}
 			if(lin < 9) {
 
 				for (int i = 0; i < 5; i++) {
-
-					if(vet[l][col]!= null) {
-						validaV++;
+					if(l<= 9) {
+						if(vet[l][col]!= null) {
+							validaV++;
+						}
+						l++;
 					}
-					l++;
 				}
 			}
 			if(validaH <= 5 && validaH!=0 || validaV <= 5 && validaV!=0) {
@@ -736,21 +841,24 @@ public class BatalhaNaval {
 			if(col < 9) {
 
 				for (int i = 0; i < 4; i++) {
-
-					if(vet[lin][c]!= null) {
-						validaH++;
+					if(c <=9) {
+						
+						if(vet[lin][c]!= null) {
+							validaH++;
+						}
+						c++;
 					}
-					c++;
 				}
 			}
 
 			if(lin < 9) {
 				for (int i = 0; i < 4; i++) {
-
-					if(vet[l][col]!= null) {
-						validaV++;
+					if(l<= 9) {
+						if(vet[l][col]!= null) {
+							validaV++;
+						}
+						l++;
 					}
-					l++;
 				}
 			}
 
@@ -764,21 +872,24 @@ public class BatalhaNaval {
 		}else if(tipoBarco == 3) {
 			if(col < 9) {
 				for (int i = 0; i < 3; i++) {
-
-					if(vet[lin][c]!= null) {
-						validaH++;
+					if(c <=9) {
+						
+						if(vet[lin][c]!= null) {
+							validaH++;
+						}
+						c++;
 					}
-					c++;
 				}
 			}
 
 			if(lin < 9) {
 				for (int i = 0; i < 3; i++) {
-
-					if(vet[l][col]!= null) {
-						validaV++;
+					if(l<= 9) {
+						if(vet[l][col]!= null) {
+							validaV++;
+						}
+						l++;
 					}
-					l++;
 				}
 			}
 
@@ -792,21 +903,24 @@ public class BatalhaNaval {
 		}else if(tipoBarco == 4) {
 			if(col < 9) {
 				for (int i = 0; i < 2; i++) {
-
-					if(vet[lin][c]!= null) {
-						validaH++;
+					if(c <=9) {
+						
+						if(vet[lin][c]!= null) {
+							validaH++;
+						}
+						c++;
 					}
-					c++;
 				}
 			}
 
 			if(lin < 9) {
 				for (int i = 0; i < 2; i++) {
-
-					if(vet[l][col]!= null) {
-						validaV++;
+					if(l<= 9) {
+						if(vet[l][col]!= null) {
+							validaV++;
+						}
+						l++;
 					}
-					l++;
 				}
 			}
 			if(validaH <= 2 && validaH!=0 || validaV <= 2 && validaV!=0) {
