@@ -1,66 +1,20 @@
 package br.ucsal;
 
-import java.io.Console;
-import java.io.IOException;
+
 import java.util.Scanner;
 
 
 public class Jogo {
 
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-		int opcao;
 		int opt = 0;
 		String[] vetUsuarios = new String[2];
-		String respo;
-		int players;
-		String acesso;
 		
-		if(vetUsuarios[0] == null) {
-			// Identifica os usuarios retornando um vetor de nomes
-			
-			tracoHorizontal();
-			tracoVertical();
-			imprimir("------ Bem-Vindo ao Jogos Divertidos! ------");
-			tracoVertical();
-			enter();
-			tracoHorizontal();
-			imprimirln("Identifique-se com seu Nome:");
-			vetUsuarios[0] = input.next();
-			
-			imprimirln("Informe o seu código de acesso:");
-			acesso = input.next();
-			cls();
-			imprimirln("Existe outro jogador? (sim | nao)");
-			respo = input.next();
-			switch (respo.toLowerCase().trim()) {
-			case "sim":
-				cls();
-				imprimirln("Identifique o nome do segundo jogador:");
-				vetUsuarios[1] = input.next();
-				break;
-			case "nao":
-				imprimirln("Apenas um jogador selecionado.");
-				break;
-			default:
-				imprimirln("Opção inválida. Apenas um jogador será selecionado.");
-			}
-			if (vetUsuarios[1] != null) {
-				cls();
-				imprimirln("## Bem-Vindos(as) " + vetUsuarios[0] + " e " + vetUsuarios[1] + " ##");
-			} else {
-				cls();
-				imprimirln("## Bem-Vindo(a) " + vetUsuarios[0] + " ##");
-			}
-						
-		}
+		
+		vetUsuarios = validarUsuario();
 		// mostra o Menu de Jogos e recebe a opção escolhida pelo usuario
-		do {
-		escolhaMenu();
-		opcao = input.nextInt();
-		cls();
-		iniciandoJogos(opcao, vetUsuarios);
-		}while (opcao > 0 && opcao < 4);
+		escolhaMenu(vetUsuarios);
+		
 
 		
 	}
@@ -78,7 +32,9 @@ public class Jogo {
 	 * digitado para a classe principal
 	 */
 
-	public static void escolhaMenu() {
+	public static void escolhaMenu(String[] vetUsuarios) {
+		Scanner input = new Scanner(System.in);
+		int opcao;
 
 			imprimirln("##-------- Este é o menu de jogos! --------##");
 			tracoHorizontal();
@@ -102,8 +58,61 @@ public class Jogo {
 	
 			imprimirln("Escolha uma opção");
 
+			do {
+				opcao = input.nextInt();
+				cls();
+				iniciandoJogos(opcao, vetUsuarios);
+				}while (opcao > 0 && opcao < 4);
+			tracoHorizontal();
+			tracoVertical();
+			Jogo.imprimir("-------------FIM! ESPERO QUE TENHA GOSTADO! :) --------------");
+			tracoVertical();
+			enter();
+			tracoHorizontal();
 		// Leva o usuário para a execussão do jogo escolhido
 
+	}
+	
+	public static String[] validarUsuario(){
+		Scanner input = new Scanner(System.in);
+		String respo, acesso;
+		String[] vetUsuarios = new String[2];
+		
+		tracoHorizontal();
+		tracoVertical();
+		imprimir("------ Bem-Vindo ao Jogos Divertidos! ------");
+		tracoVertical();
+		enter();
+		tracoHorizontal();
+		imprimirln("Identifique-se com seu Nome:");
+		vetUsuarios[0] = input.next();
+		
+		imprimirln("Informe o seu código de acesso:");
+		acesso = input.next();
+		cls();
+		imprimirln("Existe outro jogador? (sim | nao)");
+		respo = input.next();
+		switch (respo.toLowerCase().trim()) {
+		case "sim":
+			cls();
+			imprimirln("Identifique o nome do segundo jogador:");
+			vetUsuarios[1] = input.next();
+			break;
+		case "nao":
+			imprimirln("Apenas um jogador selecionado.");
+			break;
+		default:
+			imprimirln("Opção inválida. Apenas um jogador será selecionado.");
+		}
+		if (vetUsuarios[1] != null) {
+			cls();
+			imprimirln("## Bem-Vindos(as) " + vetUsuarios[0] + " e " + vetUsuarios[1] + " ##");
+		} else {
+			cls();
+			imprimirln("## Bem-Vindo(a) " + vetUsuarios[0] + " ##");
+		}
+		
+		return vetUsuarios;
 	}
 
 	public static void iniciandoJogos(int opt, String[]vet) {
@@ -111,13 +120,13 @@ public class Jogo {
 		if (opt == 1) {
 			
 			imprimirln("\nJogo da Forca selecionado\n");
-			JogoForca.main(null);
+			JogoForca.main(vet);
 		}
 		if (opt == 2) {
 			imprimirln("\nBatalha Naval selecionado.\n");
 			if(definirJogadoresBatalhaNaval(vet)) {
 				
-				BatalhaNaval.main(null);
+				BatalhaNaval.main(vet);
 			}else {
 				System.out.println("Para jogar BATALHA NAVAL precisa de 2 jogadores logados!");
 			}
@@ -127,9 +136,10 @@ public class Jogo {
 		if (opt == 3) {
 			
 			imprimirln("\nCampo Minado selecionado\n");
+			CampoMinado.main(vet);
 			
 		}
-		imprimirln("##--- Fim! Esperamos que tenha se divertido! :) ---##");
+		
 
 	}
 

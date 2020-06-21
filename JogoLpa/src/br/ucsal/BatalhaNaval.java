@@ -1,7 +1,5 @@
 package br.ucsal;
 
-import java.io.Console;
-import java.sql.Time;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,7 +8,6 @@ public class BatalhaNaval {
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-
 		/*---- BATALHA NAVAL ----*/
 		String[][] tabuleiroPlay1 = new String[10][10];
 		String[][] tabuleiroPlay2 = new String[10][10];
@@ -92,42 +89,42 @@ public class BatalhaNaval {
 			if(lin > 9 || col > 9) {
 				while(lin > 9 || col > 9) {
 					exibirTabuleiro(tabuleiroPlay1);
-					System.out.println("##- Jogador 1 (escolha a posição dos barcos) -##");
+					Jogo.imprimirln("##- Jogador 1 (escolha a posição dos barcos) -##");
 					tracoHorizontal();
 					tracoVertical();
-					System.out.print("(1) Porta aviões (5 quadrados);             ");
+					Jogo.imprimir("(1) Porta aviões (5 quadrados);             ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(2) Navio Tanque (4 quadrados);             ");
+					Jogo.imprimir("(2) Navio Tanque (4 quadrados);             ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(3) Contratorpedeiros (3 quadrados);        ");
+					Jogo.imprimir("(3) Contratorpedeiros (3 quadrados);        ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(4) Submarinos (2 quadrados);               ");
+					Jogo.imprimir("(4) Submarinos (2 quadrados);               ");
 					tracoVertical();
 					enter();
 					tracoHorizontal();
-					System.out.println("Escolha um BARCO:");
+					Jogo.imprimir("Escolha um BARCO:");
 	
 					barco = input.nextInt();
 					
 					if(barco > 4 || barco < 0) {
-						System.out.println("Opção inválida!");
+						Jogo.imprimirln("Opção inválida!");
 						while(barco > 4 || barco < 0) {
-							System.out.println("Escolha um BARCO:");
+							Jogo.imprimirln("Escolha um BARCO:");
 	
 							barco = input.nextInt();
 						}
 					}
 					
-					System.out.println("Escolha a LINHA e a COLUNA:");
+					Jogo.imprimirln("Escolha a LINHA e a COLUNA:");
 					lin = input.nextInt();
 					col = input.nextInt();
-					System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
+					Jogo.imprimirln("Escolha (1)VERTICAL e (2)HORIZONTAL:");
 					posicao = input.nextInt();
 				}
 				Jogo.cls();
@@ -174,41 +171,41 @@ public class BatalhaNaval {
 		Jogo.cls();
 		while(quantBarco < 4) {
 			exibirTabuleiro(tabuleiroPlay2);
-			System.out.println("##- Jogador 2 (escolha a posição dos barcos) -##");
+			Jogo.imprimirln("##- Jogador 2 (escolha a posição dos barcos) -##");
 			tracoHorizontal();
 			tracoVertical();
-			System.out.print("(1) Porta aviões (5 quadrados);             ");
+			Jogo.imprimir("(1) Porta aviões (5 quadrados);             ");
 			tracoVertical();
 			enter();
 			tracoVertical();
-			System.out.print("(2) Navio Tanque (4 quadrados);             ");
+			Jogo.imprimir("(2) Navio Tanque (4 quadrados);             ");
 			tracoVertical();
 			enter();
 			tracoVertical();
-			System.out.print("(3) Contratorpedeiros (3 quadrados);        ");
+			Jogo.imprimir("(3) Contratorpedeiros (3 quadrados);        ");
 			tracoVertical();
 			enter();
 			tracoVertical();
-			System.out.print("(4) Submarinos (2 quadrados);               ");
+			Jogo.imprimir("(4) Submarinos (2 quadrados);               ");
 			tracoVertical();
 			enter();
 			tracoHorizontal();
-			System.out.println("Escolha um BARCO:");
+			Jogo.imprimir("Escolha um BARCO:");
 
 			barco = input.nextInt();
 
 			if(barco > 4 || barco < 0) {
-				System.out.println("Opção inválida!");
+				Jogo.imprimirln("Opção inválida!");
 				while(barco > 4 || barco < 0) {
-					System.out.println("Escolha um BARCO:");
+					Jogo.imprimirln("Escolha um BARCO:");
 
 					barco = input.nextInt();
 				}
 			}
-			System.out.println("Escolha a LINHA e a COLUNA:");
+			Jogo.imprimirln("Escolha a LINHA e a COLUNA:");
 			lin = input.nextInt();
 			col = input.nextInt();
-			System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
+			Jogo.imprimirln("Escolha (1)VERTICAL e (2)HORIZONTAL:");
 			posicao = input.nextInt();
 			Jogo.cls();
 
@@ -217,44 +214,44 @@ public class BatalhaNaval {
 			codigo no vetor numeroDeBarcos1[]
 		*/
 			if(lin > 9 || col > 9) {
-				System.out.println("Acho que você digitou errado, tente novamente.");
+				Jogo.imprimirln("Acho que você digitou errado, tente novamente.");
 				while(lin > 9 || col > 9) {
 					exibirTabuleiro(tabuleiroPlay2);
-					System.out.println("##- Jogador 2 (escolha a posição dos barcos) -##");
+					Jogo.imprimirln("##- Jogador 2 (escolha a posição dos barcos) -##");
 					tracoHorizontal();
 					tracoVertical();
-					System.out.print("(1) Porta aviões (5 quadrados);             ");
+					Jogo.imprimir("(1) Porta aviões (5 quadrados);             ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(2) Navio Tanque (4 quadrados);             ");
+					Jogo.imprimir("(2) Navio Tanque (4 quadrados);             ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(3) Contratorpedeiros (3 quadrados);        ");
+					Jogo.imprimir("(3) Contratorpedeiros (3 quadrados);        ");
 					tracoVertical();
 					enter();
 					tracoVertical();
-					System.out.print("(4) Submarinos (2 quadrados);               ");
+					Jogo.imprimir("(4) Submarinos (2 quadrados);               ");
 					tracoVertical();
 					enter();
 					tracoHorizontal();
-					System.out.println("Escolha um BARCO:");
+					Jogo.imprimirln("Escolha um BARCO:");
 
 					barco = input.nextInt();
 
 					if(barco > 4 || barco < 0) {
-						System.out.println("Opção inválida!");
+						Jogo.imprimirln("Opção inválida!");
 						while(barco > 4 || barco < 0) {
-							System.out.println("Escolha um BARCO:");
+							Jogo.imprimirln("Escolha um BARCO:");
 
 							barco = input.nextInt();
 						}
 					}
-					System.out.println("Escolha a LINHA e a COLUNA:");
+					Jogo.imprimirln("Escolha a LINHA e a COLUNA:");
 					lin = input.nextInt();
 					col = input.nextInt();
-					System.out.println("Escolha (1)VERTICAL e (2)HORIZONTAL:");
+					Jogo.imprimirln("Escolha (1)VERTICAL e (2)HORIZONTAL:");
 					posicao = input.nextInt();
 				}
 				Jogo.cls();
@@ -311,6 +308,14 @@ public class BatalhaNaval {
 					Jogo.imprimirln("Escolha a LINHA e a COLUNA:");
 					jogada[0] = input.nextInt();
 					jogada[1] = input.nextInt();
+					if(jogada[0] > 9 || jogada[1] > 9) {
+						Jogo.imprimirln("Acho que você digitou errado, tente novamente.");
+						while(jogada[0] > 9 || jogada[1] > 9) {
+							Jogo.imprimirln("Escolha a LINHA e a COLUNA:");
+							jogada[0] = input.nextInt();
+							jogada[1] = input.nextInt();
+						}
+					}
 					cont2++;
 				} while (tabuleiroJog2[jogada[0]][jogada[1]] == "x" || tabuleiroJog2[jogada[0]][jogada[1]] == "~");
 				Jogo.cls();
@@ -321,6 +326,7 @@ public class BatalhaNaval {
 				}
 				//Esta condição verifica se o JOGADOR 1 conseguiu afundar algum barco inimigo
 				for (int i = 0; i < 4; i++) {
+					quant = 0;
 					if(i==0) {
 						
 						if(numeroDeBarcosAfundados1[i] == 0) {
@@ -333,7 +339,7 @@ public class BatalhaNaval {
 								}
 							}
 							if(quant > 0) {
-								System.out.println("Afundou um PORTA AVIÕES inimigo!");
+								Jogo.imprimirln("Afundou um PORTA AVIÕES inimigo!");
 							}
 						}
 						
@@ -349,7 +355,7 @@ public class BatalhaNaval {
 								}
 							}
 							if(quant > 0) {
-								System.out.println("Afundou um NAVIO TANQUE inimigo!");
+								Jogo.imprimirln("Afundou um NAVIO TANQUE inimigo!");
 							}
 						}
 					}
@@ -364,7 +370,7 @@ public class BatalhaNaval {
 								}
 							}
 							if(quant > 0) {
-								System.out.println("Afundou um CONTRATORPEDO inimigo!");
+								Jogo.imprimirln("Afundou um CONTRATORPEDO inimigo!");
 							}
 						}
 					}
@@ -379,7 +385,7 @@ public class BatalhaNaval {
 								}
 							}
 							if(quant > 0) {
-								System.out.println("Afundou um SUBMARINO inimigo!");
+								Jogo.imprimirln("Afundou um SUBMARINO inimigo!");
 							}
 						}
 					}
@@ -395,9 +401,17 @@ public class BatalhaNaval {
 					if (cont2 > 0) {
 						Jogo.imprimirln("Essa jogada já foi realizada.Informe uma posição válida.\n");
 					}
-					System.out.println("Escolha a LINHA e a COLUNA:");
+					Jogo.imprimirln("Escolha a LINHA e a COLUNA:");
 					jogada[0] = input.nextInt();
 					jogada[1] = input.nextInt();
+					if(jogada[0] > 9 || jogada[1] > 9) {
+						Jogo.imprimirln("Acho que você digitou errado, tente novamente.");
+						while(jogada[0] > 9 || jogada[1] > 9) {
+							Jogo.imprimirln("Escolha a LINHA e a COLUNA:");
+							jogada[0] = input.nextInt();
+							jogada[1] = input.nextInt();
+						}
+					}
 					cont2++;// talvez não funcione. rever boolean.
 				} while (tabuleiroJog1[jogada[0]][jogada[1]] == "x" || tabuleiroJog1[jogada[0]][jogada[1]] == "~");
 				Jogo.cls();
@@ -406,7 +420,7 @@ public class BatalhaNaval {
 				if(acertos2 == 14) {
 					fimJogo = 1;
 				}
-				//Esta condição verifica se o JOGADOR 1 conseguiu afundar algum barco inimigo
+				//Esta condição verifica se o JOGADOR 2 conseguiu afundar algum barco inimigo
 				for (int i = 0; i < 4; i++) {
 					quant = 0;
 					if(i==0) {
@@ -434,7 +448,7 @@ public class BatalhaNaval {
 								}
 							}
 							if(quant > 0) {
-								System.out.println("Afundou um NAVIO TANQUE inimigo!");
+								Jogo.imprimirln("Afundou um NAVIO TANQUE inimigo!");
 							}
 						}
 					}
@@ -448,7 +462,7 @@ public class BatalhaNaval {
 								}
 							}
 							if(quant > 0) {
-								System.out.println("Afundou um CONTRATORPEDO inimigo!");
+								Jogo.imprimirln("Afundou um CONTRATORPEDO inimigo!");
 							}
 						}
 					}
@@ -462,7 +476,7 @@ public class BatalhaNaval {
 								}
 							}
 							if(quant > 0) {
-								System.out.println("Afundou um SUBMARINO inimigo!");
+								Jogo.imprimirln("Afundou um SUBMARINO inimigo!");
 							}
 						}
 					}
@@ -502,7 +516,7 @@ public class BatalhaNaval {
 			BatalhaNaval.main(args);
 		} else {
 			Jogo.cls();
-			Jogo.main(args);
+			Jogo.escolhaMenu(args);
 		}
 
 
@@ -599,7 +613,7 @@ public class BatalhaNaval {
 					}
 					col++;
 				}
-				if(validador == 5) {
+				if(validador == 4) {
 					return 2;
 				}
 
@@ -617,7 +631,7 @@ public class BatalhaNaval {
 					}
 					lin++;
 				}
-				if(validador == 2) {
+				if(validador == 3) {
 					return 3;
 				}
 
@@ -697,15 +711,15 @@ public class BatalhaNaval {
 						quantBarco++;
 
 					}else {
-						System.out.println("Este barco já foi escolhido!");
+						Jogo.imprimirln("Este barco já foi escolhido!");
 					}
 
 				}else {
-					System.out.println("Já existe um barco nesta posição!");
+					Jogo.imprimirln("Já existe um barco nesta posição!");
 				}
 
 			}else {
-				System.out.println("Posição inválida, verifique a posição digitada!");
+				Jogo.imprimirln("Posição inválida, verifique a posição digitada!");
 			}
 		}else if(posicao == 2) {
 			if(verificaPosicaoHorizontal(col, tabuleiro, barco)) {
@@ -716,14 +730,14 @@ public class BatalhaNaval {
 						quantBarco++;
 
 					}else {
-						System.out.println("Este barco já foi escolhido!");
+						Jogo.imprimirln("Este barco já foi escolhido!");
 					}
 
 				}else {
-					System.out.println("Já existe um barco nesta posição!");
+					Jogo.imprimirln("Já existe um barco nesta posição!");
 				}
 			}else {
-				System.out.println("Posição inválida, verifique a posição digitada!");
+				Jogo.imprimirln("Posição inválida, verifique a posição digitada!");
 			}
 		}
 
@@ -736,8 +750,7 @@ public class BatalhaNaval {
 		for (int i = 0; i < barcos.length; i++) {
 			if(barcos[i] == 0) {
 				valida++;
-			}else if(barcos[i] != barco) {
-				valida++;
+			
 			}else if(barcos[i] == barco) {
 
 				return false;
@@ -756,26 +769,25 @@ public class BatalhaNaval {
 	public static void exibirTabuleiro(String[][] vet) {
 		System.out.print("     ");
 		for (int i = 0; i < vet.length; i++) {
-			System.out.print(i+"   ");
+			Jogo.imprimir(i+"   ");
 		}
 		enter();
 		for (int lin = 0; lin < vet.length; lin++) {
-			System.out.println("   -----------------------------------------");
-			System.out.print(lin+"  ");
+			Jogo.imprimirln("   -----------------------------------------");
+			Jogo.imprimir(lin+"  ");
 			tracoVertical();				
 			for(int col = 0; col < vet.length; col++ ) {
 				if(vet[lin][col] != null) {
-					System.out.print(" "+vet[lin][col]+" ");
+					Jogo.imprimir(" "+vet[lin][col]+" ");
 				}else {
 
-					System.out.print("   ");
+					Jogo.imprimir("   ");
 				}
 				tracoVertical();
 			}
 			enter();
 		}
-		System.out.println("   -----------------------------------------");
-
+		Jogo.imprimir("   -----------------------------------------");
 
 	}
 
@@ -790,7 +802,6 @@ public class BatalhaNaval {
 		{
 			vet2[jogada[0]][jogada[1]] = "x";
 			Jogo.imprimir("\nVocê acertou!\n");
-			int retorno, quant=0;
 				
 			acerto++;
 
@@ -1004,7 +1015,7 @@ public class BatalhaNaval {
 			}
 			break;
 		default:
-			System.out.println("Opção inválida!");
+			Jogo.imprimirln("Opção inválida!");
 			break;
 		}
 	}
@@ -1079,14 +1090,9 @@ public class BatalhaNaval {
 			}
 			break;
 		default:
-			System.out.println("Opção inválida!");
+			Jogo.imprimirln("Opção inválida!");
 			break;
 		}
 	}
-
-
-
 	/*-------------------------------------- BATALHA NAVAL (( FINAL )) --------------------------------------------*/
-
-
 }

@@ -6,7 +6,7 @@ public class JogoForca {
 
 	public static void main(String[] args) {
 		// Linha 9: criaçao da variavel que conta os erros durante as tentativas do usuário, linha 10: declaraçao da palavra, linha 11-13: alterando as letras da palavra por "_".
-		int numErros = 0;
+		int numErros = 0, resposta = 0;
 		String[] palavra = obterPalavraOculta(); 
 		String[] ultimoResultado = new String[palavra.length]; 
 		for(int i = 0; i < palavra.length; i++) {
@@ -18,12 +18,12 @@ public class JogoForca {
 		String A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z;
 		imprimir("\n\n<<< JOGO DA FORCA >>>\n" + 
 				"\n" + 
-				"Voce deverá acertar a palavra em 9 tentativas para vencer o jogo.\n");
+				"Voce dever� acertar a palavra em 9 tentativas para vencer o jogo.\n");
 		Scanner sc = new Scanner(System.in);
 		// Linha 24: numero de tentativas que o usuário terá, linha 26-27: for que vai rodar todo o jogo, onde pede a letra, a transforma em maiúscula.
 		int numTentativa = 9;
 		for (int i = 0; i < numTentativa; i++) { 
-			imprimir("\n\nInforme a letra da " + (i+1) + "ª tentativa: ");
+			imprimir("\n\nInforme a letra da " + (i+1) + "� tentativa: ");
 			String letra = sc.next().toUpperCase(); 
 		// Linha 29-32: Chama o método contem letra, caso tenha, o "_" é substituido pela letra, se nao, começa a contagem dos erros para implementaçao da forca.
 			if (contemLetra(palavra, letra)) {
@@ -36,16 +36,61 @@ public class JogoForca {
 		 * O break encerra a execuçao do loop. Linha 42-44: chama o método e imprime o resultado de vencedor da jogada.  */
 			construirForca(ultimoResultado, numErros);
 			if (numErros >= 6) {
-				System.out.println("\n\nPerdeu, playboy!");
-				break;
+				Jogo.tracoHorizontal();
+				Jogo.tracoVertical();
+				Jogo.imprimir("-------------Voc� PERDEU!--------------");
+				Jogo.tracoVertical();
+				Jogo.enter();
+				Jogo.tracoHorizontal();
+				do {
+					Jogo.imprimirln("Informe uma das op��es: \n(1) Jogar novamente\n(2) Voltar ao Menu");
+					resposta = sc.nextInt();
+				} while (resposta != 1 && resposta != 2);
+				if(resposta ==1) {
+					Jogo.cls();
+					JogoForca.main(args);
+				} else {
+					Jogo.cls();
+					Jogo.escolhaMenu();
+				}
 			}
 			if (ganhouJogo(ultimoResultado)) {
-				System.out.println("\n\nO jogo terminou. Você é o grande vencedor!");
-				break;
+				Jogo.tracoHorizontal();
+				Jogo.tracoVertical();
+				Jogo.imprimir("-------------Voc� VENCEU!--------------");
+				Jogo.tracoVertical();
+				Jogo.enter();
+				Jogo.tracoHorizontal();
+				do {
+					Jogo.imprimirln("Informe uma das op��es: \n(1) Jogar novamente\n(2) Voltar ao Menu");
+					resposta = sc.nextInt();
+				} while (resposta != 1 && resposta != 2);
+				if(resposta ==1) {
+					Jogo.cls();
+					JogoForca.main(args);
+				} else {
+					Jogo.cls();
+					Jogo.escolhaMenu();
+				}
 			}
 		}
-		System.out.println("\n\nFIM DE JOGO");
-		Jogo.main(args);
+		Jogo.tracoHorizontal();
+		Jogo.tracoVertical();
+		Jogo.imprimir("-------------FIM DE JOGO!--------------");
+		Jogo.tracoVertical();
+		Jogo.enter();
+		Jogo.tracoHorizontal();
+		do {
+			Jogo.imprimirln("Informe uma das op��es: \n(1) Jogar novamente\n(2) Voltar ao Menu");
+			resposta = sc.nextInt();
+		} while (resposta != 1 && resposta != 2);
+		if(resposta ==1) {
+			Jogo.cls();
+			JogoForca.main(args);
+		} else {
+			Jogo.cls();
+			Jogo.escolhaMenu();
+		}
 	}
 	
 	// Construçao da forca por array, linha 52: Parametro de espaço para separar os "_", linha 96: impressao da forca quando for chamado.
@@ -59,7 +104,7 @@ public class JogoForca {
 				"   |\n" + 
 				"   |\n" + 
 				"   |\n" + 
-				"  ——--\n\n" + resultado);
+				"  ------------\n\n" + resultado);
 		passos[1] = ("    _____\n" + 
 				"   |	 |	\n" + 
 				"   |" + "	 0\n" + 
@@ -67,7 +112,7 @@ public class JogoForca {
 				"   |\n" + 
 				"   |\n" + 
 				"   |\n" + 
-				"  ————\n\n" + resultado);
+				"  ------------\n\n" + resultado);
 		passos[2] = ("    _____\n" + 
 				"   |	 |	\n" + 
 				"   |" + "	 0\n" + 
@@ -75,7 +120,7 @@ public class JogoForca {
 				"   |\n" + 
 				"   |\n" + 
 				"   |\n" + 
-				"  ————\n\n" + resultado);
+				"  ------------\n\n" + resultado);
 		passos[3] = ("    _____\n" + 
 				"   |	 |	\n" + 
 				"   |" + "	 0\n" + 
@@ -83,7 +128,7 @@ public class JogoForca {
 				"   |\n" + 
 				"   |\n" + 
 				"   |\n" + 
-				"  ————\n\n" + resultado);
+				"  ------------\n\n" + resultado);
 		passos[4] = ("    _____\n" + 
 				"   |	 |	\n" + 
 				"   |" + "	 0\n" + 
@@ -91,7 +136,7 @@ public class JogoForca {
 				"   |\n" + 
 				"   |\n" + 
 				"   |\n" + 
-				"  ————\n\n" + resultado);
+				"  ------------\n\n" + resultado);
 		passos[5] = ("    _____\n" + 
 				"   |	 |	\n" + 
 				"   |" + "	 0\n" + 
@@ -99,7 +144,7 @@ public class JogoForca {
 				"   |" + "    /\n" + 
 				"   |\n" + 
 				"   |\n" + 
-				"  ————\n\n" + resultado);
+				"  ------------\n\n" + resultado);
 		passos[6] = ("    _____\n" + 
 				"   |	 |	\n" + 
 				"   |" + "	 0\n" + 
@@ -107,7 +152,7 @@ public class JogoForca {
 				"   |" + "    / \\"  + "\n" + 
 				"   |\n" + 
 				"   |\n" + 
-				"  ————\n\n" + resultado);
+				" ------------\n\n" + resultado);
 		imprimir(passos[numErros]);
 	} 
 	
